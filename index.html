@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I Freni Aerodinamici (Diruttori) — Costruzioni Aeronautiche</title>
+  <style>
+    /* ==========================================================================
+       DESIGN SYSTEM & THEME VARIABLES (Ivory Academic Palette)
+       ========================================================================== */
+    :root {
+      --bg-main: #FDFBF7;
+      --bg-card: #FFFFFF;
+      --bg-subtle: #F5F0E6;
+      --bg-accent: #EFE8DA;
+      
+      --text-main: #1E293B;
+      --text-muted: #475569;
+      --text-light: #64748B;
+      
+      --brand-blue: #1E3A8A;
+      --brand-blue-hover: #1D4ED8;
+      --brand-blue-light: #EFF6FF;
+      
+      --accent-orange: #C2410C;
+      --accent-orange-light: #FFEDD5;
+      
+      --border-color: #E2D9CC;
+      --border-focus: #1E3A8A;
+      
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 25px rgba(0,0,0,0.12);
+      
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      
+      --transition-fast: 0.2s ease;
+      --transition-normal: 0.3s ease;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* Base Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+      font-size: 1rem;
+      padding-bottom: 3rem;
+    }
+
+    /* Container Layout */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    /* Accessibility Focus Outline */
+    :focus-visible {
+      outline: 3px solid var(--brand-blue-hover);
+      outline-offset: 3px;
+    }
+
+    /* ==========================================================================
+       HEADER & INSTITUTIONAL BANNER
+       ========================================================================== */
+    header {
+      background-color: var(--bg-card);
+      border-bottom: 2px solid var(--border-color);
+      padding: 2rem 0;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-badge-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-radius: 9999px;
+      background-color: var(--bg-subtle);
+      color: var(--brand-blue);
+      border: 1px solid var(--border-color);
+    }
+
+    .badge-accent {
+      background-color: var(--accent-orange-light);
+      color: var(--accent-orange);
+      border-color: #FDBA74;
+    }
+
+    header h1 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 800;
+      color: var(--brand-blue);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    header p.subtitle {
+      font-size: 1.125rem;
+      color: var(--text-muted);
+      max-width: 850px;
+    }
+
+    .source-citation {
+      margin-top: 1rem;
+      padding: 0.75rem 1rem;
+      background-color: var(--bg-subtle);
+      border-left: 4px solid var(--brand-blue);
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       NAVIGATION TABS
+       ========================================================================== */
+    .nav-tabs {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border-color);
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-btn {
+      padding: 0.75rem 1.25rem;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all var(--transition-fast);
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    }
+
+    .nav-btn:hover {
+      color: var(--brand-blue);
+      background-color: var(--bg-subtle);
+    }
+
+    .nav-btn.active {
+      color: var(--brand-blue);
+      border-bottom-color: var(--brand-blue);
+      background-color: var(--bg-card);
+    }
+
+    /* ==========================================================================
+       CARDS & DIDACTIC SECTIONS
+       ========================================================================== */
+    .section-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .card-header {
+      margin-bottom: 1rem;
+    }
+
+    .card-number {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--accent-orange);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.25rem;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--brand-blue);
+      line-height: 1.3;
+    }
+
+    .card-summary {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+      flex-grow: 1;
+    }
+
+    .btn-detail {
+      align-self: start;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--brand-blue);
+      background-color: var(--brand-blue-light);
+      border: 1px solid rgba(30, 58, 138, 0.2);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background-color var(--transition-fast);
+    }
+
+    .btn-detail:hover {
+      background-color: #DBEAFE;
+    }
+
+    /* ==========================================================================
+       SIMULATOR SECTION
+       ========================================================================== */
+    .simulator-container {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      margin-bottom: 3rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .sim-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 992px) {
+      .sim-grid {
+        grid-template-columns: 380px 1fr;
+      }
+    }
+
+    .sim-controls {
+      background-color: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+    }
+
+    .control-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .control-group label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.875rem;
+      font-weight: 700;
+      margin-bottom: 0.375rem;
+      color: var(--text-main);
+    }
+
+    .control-group .val-badge {
+      font-family: monospace;
+      font-size: 0.9375rem;
+      color: var(--brand-blue);
+      background-color: var(--bg-card);
+      padding: 0.125rem 0.5rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+    }
+
+    input[type="range"] {
+      width: 100%;
+      height: 8px;
+      border-radius: 4px;
+      background: #CBD5E1;
+      outline: none;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--brand-blue);
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .sim-outputs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .output-card {
+      background-color: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.875rem;
+      text-align: center;
+    }
+
+    .output-card .label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+
+    .output-card .value {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--brand-blue);
+      font-family: monospace;
+    }
+
+    .output-card .unit {
+      font-size: 0.75rem;
+      color: var(--text-light);
+    }
+
+    .svg-container {
+      background-color: var(--bg-main);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 320px;
+    }
+
+    svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* ==========================================================================
+       GLOSSARY TABLE & QUIZ
+       ========================================================================== */
+    .glossary-table-wrapper {
+      overflow-x: auto;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      margin-bottom: 2.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9375rem;
+    }
+
+    th {
+      background-color: var(--bg-subtle);
+      color: var(--brand-blue);
+      font-weight: 700;
+      padding: 0.875rem 1rem;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    td {
+      padding: 0.875rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .symbol-code {
+      font-family: Georgia, serif;
+      font-weight: bold;
+      font-size: 1.05rem;
+      color: var(--accent-orange);
+    }
+
+    .quiz-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .quiz-question {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--brand-blue);
+      margin-bottom: 1rem;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .quiz-option-btn {
+      text-align: left;
+      padding: 0.75rem 1rem;
+      font-size: 0.9375rem;
+      background-color: var(--bg-main);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      color: var(--text-main);
+    }
+
+    .quiz-option-btn:hover {
+      background-color: var(--bg-subtle);
+      border-color: var(--brand-blue);
+    }
+
+    .quiz-option-btn.selected {
+      background-color: var(--brand-blue-light);
+      border-color: var(--brand-blue);
+      font-weight: 600;
+    }
+
+    .quiz-feedback {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.9375rem;
+      display: none;
+    }
+
+    .quiz-feedback.correct {
+      display: block;
+      background-color: #DCFCE7;
+      color: #166534;
+      border: 1px solid #86EFAC;
+    }
+
+    .quiz-feedback.incorrect {
+      display: block;
+      background-color: #FEE2E2;
+      color: #991B1B;
+      border: 1px solid #FCA5A5;
+    }
+
+    /* ==========================================================================
+       MODAL DIALOGS FOR DEEP DIVES
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(2px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-fast);
+      padding: 1rem;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-container {
+      background-color: var(--bg-card);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 750px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      background-color: var(--bg-card);
+      z-index: 10;
+    }
+
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--brand-blue);
+    }
+
+    .modal-close-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-close-btn:hover {
+      background-color: var(--bg-subtle);
+      color: var(--text-main);
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+    }
+
+    .formula-block {
+      background-color: var(--bg-subtle);
+      border-left: 4px solid var(--accent-orange);
+      padding: 1rem 1.25rem;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin: 1rem 0;
+      font-family: Georgia, serif;
+      font-size: 1.1rem;
+    }
+
+    .example-box {
+      background-color: var(--brand-blue-light);
+      border: 1px solid #BFDBFE;
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-top: 1.25rem;
+    }
+
+    .example-box h4 {
+      color: var(--brand-blue);
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .citation-tag {
+      font-size: 0.8125rem;
+      color: var(--text-light);
+      font-style: italic;
+      margin-top: 1rem;
+      border-top: 1px dashed var(--border-color);
+      padding-top: 0.5rem;
+    }
+
+    /* Math HTML Formatting */
+    .math-var { font-style: italic; font-family: Georgia, serif; }
+    .math-sub { font-size: 0.75em; vertical-align: sub; }
+    .math-sup { font-size: 0.75em; vertical-align: super; }
+
+    /* Footer Verification Box */
+    .verification-box {
+      background-color: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-top: 3rem;
+      font-size: 0.875rem;
+    }
+
+    .verification-box h3 {
+      color: var(--brand-blue);
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HEADER SECTION
+       ========================================================================== -->
+  <header>
+    <div class="container">
+      <div class="header-badge-container">
+        <span class="badge">ITI "Ettore Majorana" — Somma Vesuviana</span>
+        <span class="badge">Costruzioni Aeronautiche</span>
+        <span class="badge badge-accent">Prof. Ing. Raucci Biagio</span>
+        <span class="badge">A.S. 2026/2027</span>
+      </div>
+      <h1>I Freni Aerodinamici (Diruttori)</h1>
+      <p class="subtitle">
+        Analisi teorica, formulazione analitica e simulazione dinamica dell'incremento di resistenza parassita nel volo librato.
+      </p>
+      <div class="source-citation">
+        <strong>Fonte Scientifico-Didattica:</strong> <em>Meccanica del Volo dell'Aliante — Il Volo Librato</em> (Prof. Ing. B. Raucci).
+        Riferimenti: Richiami di Teoria Sezione 9 & Sezione 12 | Esercizi applicativi 7, 8, 13, 20, 21, 26.
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ==========================================================================
+         NAVIGATION TABS
+         ========================================================================== -->
+    <nav class="nav-tabs" aria-label="Sezioni dell'infografica">
+      <button class="nav-btn active" onclick="switchTab('didattica')">Sezioni Didattiche</button>
+      <button class="nav-btn" onclick="switchTab('simulatore')">Simulatore Interactive 2D</button>
+      <button class="nav-btn" onclick="switchTab('glossario')">Glossario Simboli e Unità</button>
+      <button class="nav-btn" onclick="switchTab('quiz')">Mini-Quiz di Verifica</button>
+      <button class="nav-btn" onclick="switchTab('limiti')">Limiti Modello & Verifica</button>
+    </nav>
+
+    <!-- ==========================================================================
+         TAB 1: DIDACTIC SECTIONS (ALWAYS VISIBLE SUMMARY + MODAL DEEP DIVES)
+         ========================================================================== -->
+    <div id="tab-didattica" class="tab-content">
+      <div class="section-grid">
+        
+        <!-- Section 1 -->
+        <article class="card">
+          <div class="card-header">
+            <div class="card-number">Sezione 01</div>
+            <h2 class="card-title">Definizione e Funzione Operativa</h2>
+          </div>
+          <p class="card-summary">
+            I diruttori sono superfici piane estraibili con un elevatissimo coefficiente proprio di resistenza (<span class="math-var">C<span class="math-sub">Df</span></span> = 1,6–1,7). Aumentano la sola resistenza parassita, permettendo di irripidire la discesa e contenere la velocità in picchiata.
+          </p>
+          <button class="btn-detail" onclick="openModal('modal-sez1')">
+            <span>Approfondisci &amp; Esempio</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </article>
+
+        <!-- Section 2 -->
+        <article class="card">
+          <div class="card-header">
+            <div class="card-number">Sezione 02</div>
+            <h2 class="card-title">Resistenza Parassita Complessiva</h2>
+          </div>
+          <p class="card-summary">
+            L'estrazione dei freni modifica il coefficiente di resistenza parassita totale dell'aliante: <span class="math-var">C'<span class="math-sub">D0</span> = C<span class="math-sub">D0</span> + C<span class="math-sub">Df</span> · (S<span class="math-sub">f</span> / S)</span>. Anche una superficie ridotta (<span class="math-var">S<span class="math-sub">f</span></span>) incrementa la resistenza di oltre 6 volte.
+          </p>
+          <button class="btn-detail" onclick="openModal('modal-sez2')">
+            <span>Formula e Sviluppo Analitico</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </article>
+
+        <!-- Section 3 -->
+        <article class="card">
+          <div class="card-header">
+            <div class="card-number">Sezione 03</div>
+            <h2 class="card-title">Velocità Limite in Picchiata Verticale</h2>
+          </div>
+          <p class="card-summary">
+            Nelle manovre di picchiata verticale (candela, <span class="math-var">γ</span> = 90°), l'estrazione dei freni abbatte la velocità limite vera (<span class="math-var">V<span class="math-sub">lim</span></span>) a meno della metà, garantendo l'integrità della struttura e il rispetto della <span class="math-var">V<span class="math-sub">NE</span></span>.
+          </p>
+          <button class="btn-detail" onclick="openModal('modal-sez3')">
+            <span>Passaggi e Calcolo Vlim</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </article>
+
+        <!-- Section 4 -->
+        <article class="card">
+          <div class="card-header">
+            <div class="card-number">Sezione 04</div>
+            <h2 class="card-title">Efficienza Massima e Angolo di Rampa</h2>
+          </div>
+          <p class="card-summary">
+            L'efficienza aerodinamica massima a freni estesi (<span class="math-var">E'<span class="math-sub">max</span></span>) si riduce drasticamente, aumentando il minimo angolo di discesa (<span class="math-var">γ'<span class="math-sub">min</span></span>) per oltrepassare ostacoli in sicurezza prima dell'atterraggio.
+          </p>
+          <button class="btn-detail" onclick="openModal('modal-sez4')">
+            <span>Dimostrazione Emax e γmin</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </article>
+
+        <!-- Section 5 -->
+        <article class="card">
+          <div class="card-header">
+            <div class="card-number">Sezione 05</div>
+            <h2 class="card-title">Bilancio delle Forze e Frenatura Addizionale</h2>
+          </div>
+          <p class="card-summary">
+            Nel volo librato ripido, la resistenza addizionale <span class="math-var">R<span class="math-sub">add</span> = R<span class="math-sub">tot</span> - D<span class="math-sub">vel</span></span> richiesta ai freni rappresenta fino all'85-90% dell'intera forza frenante necessaria a bilanciare la componente del peso lungo la traiettoria.
+          </p>
+          <button class="btn-detail" onclick="openModal('modal-sez5')">
+            <span>Scomposizione Vettoriale e Sf</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </article>
+
+        <!-- Section 6 -->
+        <article class="card">
+          <div class="card-header">
+            <div class="card-number">Sezione 06</div>
+            <h2 class="card-title">Aspetti Ingegneristici Non Chiariti</h2>
+          </div>
+          <p class="card-summary">
+            Il modello 1D del testo trascura la tipologia costruttiva (lama singola vs doppio pettino Schempp-Hirth), la posizione lungo l'apertura/corda, le interferenze sulla portanza (<span class="math-var">C<span class="math-sub">L</span></span>) e l'impatto sul fattore di Oswald (<span class="math-var">e</span>).
+          </p>
+          <button class="btn-detail" onclick="openModal('modal-sez6')">
+            <span>Analisi Critica del Modello</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         TAB 2: INTERACTIVE SIMULATOR MODULE
+         ========================================================================== -->
+    <div id="tab-simulatore" class="tab-content" style="display:none;">
+      <div class="simulator-container">
+        <div style="margin-bottom: 1.5rem;">
+          <h2 style="color: var(--brand-blue); font-size: 1.5rem; font-weight: 800;">Simulatore Aerodinamico del Volo Librato e Picchiata</h2>
+          <p style="color: var(--text-muted); font-size: 0.9375rem;">
+            Modifica i parametri di volo ed estrazione freni per osservare l'effetto istantaneo su resistenza, velocità limite e bilancio delle forze.
+          </p>
+        </div>
+
+        <div class="sim-grid">
+          <!-- Controls Panel -->
+          <div class="sim-controls">
+            <div class="control-group">
+              <label for="range-estrazione">
+                <span>Estrazione Diruttori (<span class="math-var">k</span>)</span>
+                <span class="val-badge" id="val-estrazione">100 %</span>
+              </label>
+              <input type="range" id="range-estrazione" min="0" max="100" value="100" oninput="updateSimulation()">
+              <div style="font-size:0.75rem; color:var(--text-light); margin-top:0.25rem;">Superficie estesa <span class="math-var">S<span class="math-sub">f</span></span>: <span id="lbl-sf">0.55</span> m²</div>
+            </div>
+
+            <div class="control-group">
+              <label for="range-gamma">
+                <span>Inclinazione Traiettoria (<span class="math-var">γ</span>)</span>
+                <span class="val-badge" id="val-gamma">90 °</span>
+              </label>
+              <input type="range" id="range-gamma" min="2" max="90" value="90" oninput="updateSimulation()">
+              <div style="font-size:0.75rem; color:var(--text-light); margin-top:0.25rem;">90° = Picchiata verticale (candela)</div>
+            </div>
+
+            <div class="control-group">
+              <label for="range-quota">
+                <span>Quota di Volo (<span class="math-var">h</span>)</span>
+                <span class="val-badge" id="val-quota">0 m (S.L.)</span>
+              </label>
+              <input type="range" id="range-quota" min="0" max="4000" step="500" value="0" oninput="updateSimulation()">
+              <div style="font-size:0.75rem; color:var(--text-light); margin-top:0.25rem;">Densità relativa <span class="math-var">σ</span> = <span id="lbl-sigma">1.000</span></div>
+            </div>
+
+            <div class="control-group">
+              <label for="range-ws">
+                <span>Carico Alare (<span class="math-var">W / S</span>)</span>
+                <span class="val-badge" id="val-ws">216 N/m²</span>
+              </label>
+              <input type="range" id="range-ws" min="150" max="350" value="216" oninput="updateSimulation()">
+              <div style="font-size:0.75rem; color:var(--text-light); margin-top:0.25rem;">Peso W = <span id="lbl-peso">2646</span> N (<span class="math-var">S</span> = 12.25 m²)</div>
+            </div>
+          </div>
+
+          <!-- Output & Graphics Panel -->
+          <div>
+            <div class="sim-outputs-grid">
+              <div class="output-card">
+                <div class="label">Coeff. Parassita C'<sub>D0</sub></div>
+                <div class="value" id="out-cd0">0.0913</div>
+                <div class="unit">Adimensionale</div>
+              </div>
+              <div class="output-card">
+                <div class="label">Velocità Limite V<sub>lim</sub></div>
+                <div class="value" id="out-vlim">223.6</div>
+                <div class="unit">km/h (<span id="out-vlim-ms">62.1</span> m/s)</div>
+              </div>
+              <div class="output-card">
+                <div class="label">Efficienza E'<sub>max</sub></div>
+                <div class="value" id="out-emax">12.1</div>
+                <div class="unit">Adimensionale</div>
+              </div>
+              <div class="output-card">
+                <div class="label">Angolo Min Rampa γ'<sub>min</sub></div>
+                <div class="value" id="out-gmin">4° 44'</div>
+                <div class="unit">Gradi e primi</div>
+              </div>
+              <div class="output-card">
+                <div class="label">Resistenza Freni R<sub>add</sub></div>
+                <div class="value" id="out-radd">2209</div>
+                <div class="unit">N (<span id="out-radd-pct">83.5</span>% di R<sub>tot</sub>)</div>
+              </div>
+            </div>
+
+            <!-- Dynamic SVG Graphic Visualizer -->
+            <div class="svg-container">
+              <svg id="sim-svg" width="600" height="280" viewBox="0 0 600 280">
+                <!-- SVG Content rendered dynamically via JS -->
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         TAB 3: GLOSSARY OF SYMBOLS & SI UNITS
+         ========================================================================== -->
+    <div id="tab-glossario" class="tab-content" style="display:none;">
+      <h2 style="color: var(--brand-blue); font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem;">
+        Glossario dei Simboli, Significato Fisico e Unità di Misura (SI)
+      </h2>
+      <div class="glossary-table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Simbolo</th>
+              <th>Significato Fisico e Descrizione</th>
+              <th>Unità SI</th>
+              <th>Valore di Riferimento / Equazione</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="symbol-code">C'<span class="math-sub">D0</span></td>
+              <td>Coefficiente di resistenza parassita totale con freni estesi</td>
+              <td>Adimensionale</td>
+              <td><span class="math-var">C<span class="math-sub">D0</span> + C<span class="math-sub">Df</span> · (S<span class="math-sub">f</span> / S)</span></td>
+            </tr>
+            <tr>
+              <td class="symbol-code">C<span class="math-sub">D0</span></td>
+              <td>Coefficiente di resistenza parassita dell'aliante pulito (freni rientrati)</td>
+              <td>Adimensionale</td>
+              <td>0,0151 (Aliante da studio)</td>
+            </tr>
+            <tr>
+              <td class="symbol-code">C<span class="math-sub">Df</span></td>
+              <td>Coefficiente di resistenza aerodinamica proprio delle superfici dei freni</td>
+              <td>Adimensionale</td>
+              <td>1,6 – 1,7 (tipico della lastra piana)</td>
+            </tr>
+            <tr>
+              <td class="symbol-code">S<span class="math-sub">f</span></td>
+              <td>Superficie frontale totale proiettata dei diruttori estesi</td>
+              <td>m²</td>
+              <td>0,55 m² (freni completamente estratti)</td>
+            </tr>
+            <tr>
+              <td class="symbol-code">S</td>
+              <td>Superficie alare di riferimento dell'aliante</td>
+              <td>m²</td>
+              <td>12,25 m²</td>
+            </tr>
+            <tr>
+              <td class="symbol-code">V<span class="math-sub">lim</span></td>
+              <td>Velocità limite vera di equilibrio lungo la traiettoria in picchiata</td>
+              <td>m/s (o km/h)</td>
+              <td><span class="math-var">(1,277 / √σ) · √[(W/S) / C'<span class="math-sub">D0</span>]</span></td>
+            </tr>
+            <tr>
+              <td class="symbol-code">σ</td>
+              <td>Densità relativa dell'aria alla quota <span class="math-var">h</span> (<span class="math-var">ρ / ρ<span class="math-sub">0</span></span>)</td>
+              <td>Adimensionale</td>
+              <td>1,000 al livello del mare (<span class="math-var">ρ<span class="math-sub">0</span></span> = 1,2257 kg/m³)</td>
+            </tr>
+            <tr>
+              <td class="symbol-code">W / S</td>
+              <td>Carico alare (Rapporto tra Peso totale dell'aliante e Superficie alare)</td>
+              <td>N/m² (o Pa)</td>
+              <td>216 N/m² (con W = 2646 N)</td>
+            </tr>
+            <tr>
+              <td class="symbol-code">E'<span class="math-sub">max</span></td>
+              <td>Efficienza aerodinamica massima dell'aliante con freni estesi</td>
+              <td>Adimensionale</td>
+              <td><span class="math-var">0,886 · √[(e · AR) / C'<span class="math-sub">D0</span>]</span></td>
+            </tr>
+            <tr>
+              <td class="symbol-code">e · AR</td>
+              <td>Allungamento alare effettivo (Allungamento geometrico × Fattore di Oswald)</td>
+              <td>Adimensionale</td>
+              <td>17 (Aliante dell'Esercizio 8)</td>
+            </tr>
+            <tr>
+              <td class="symbol-code">γ'<span class="math-sub">min</span></td>
+              <td>Minimo angolo di rampa (discesa) rispetto all'orizzonte a freni estesi</td>
+              <td>gradi (°) / rad</td>
+              <td><span class="math-var">arctan(1 / E'<span class="math-sub">max</span>)</span></td>
+            </tr>
+            <tr>
+              <td class="symbol-code">R<span class="math-sub">tot</span></td>
+              <td>Resistenza aerodinamica totale necessaria per bilanciare il peso in discesa</td>
+              <td>N (Newton)</td>
+              <td><span class="math-var">W · sin(γ)</span></td>
+            </tr>
+            <tr>
+              <td class="symbol-code">D<span class="math-sub">vel</span></td>
+              <td>Resistenza aerodinamica propria del corpo velivolo</td>
+              <td>N (Newton)</td>
+              <td><span class="math-var">C<span class="math-sub">D</span> · q · S</span></td>
+            </tr>
+            <tr>
+              <td class="symbol-code">R<span class="math-sub">add</span></td>
+              <td>Resistenza addizionale erogata specificamente dai diruttori</td>
+              <td>N (Newton)</td>
+              <td><span class="math-var">R<span class="math-sub">tot</span> - D<span class="math-sub">vel</span> = C<span class="math-sub">Df</span> · q · S<span class="math-sub">f</span></span></td>
+            </tr>
+            <tr>
+              <td class="symbol-code">q</td>
+              <td>Pressione dinamica del flusso d'aria relativa all'aliante</td>
+              <td>Pa (N/m²)</td>
+              <td><span class="math-var">½ · ρ · V²</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         TAB 4: MINI-QUIZ WITH IMMEDIATE FEEDBACK
+         ========================================================================== -->
+    <div id="tab-quiz" class="tab-content" style="display:none;">
+      <h2 style="color: var(--brand-blue); font-size: 1.5rem; font-weight: 800; margin-bottom: 1.5rem;">
+        Mini-Quiz di Verifica della Comprensione
+      </h2>
+
+      <!-- Quiz Question 1 -->
+      <div class="quiz-card">
+        <div class="quiz-question">
+          1. Perché bastano superfici di diruttori relativamente piccole (<span class="math-var">S<span class="math-sub">f</span></span> di pochi decimi di m²) per ridurre drasticamente l'efficienza complessiva dell'aliante?
+        </div>
+        <div class="quiz-options">
+          <button class="quiz-option-btn" onclick="checkQuiz(1, 'A', this)">
+            A) Perché la resistenza parassita dell'aliante pulito (<span class="math-var">C<span class="math-sub">D0</span></span> ≈ 0,015) è piccolissima, rendendo il contributo <span class="math-var">C<span class="math-sub">Df</span> · (S<span class="math-sub">f</span>/S)</span> predominante e incrementando il coefficiente totale di oltre 6 volte.
+          </button>
+          <button class="quiz-option-btn" onclick="checkQuiz(1, 'B', this)">
+            B) Perché l'estrazione dei freni riduce il peso totale dell'aliante consentendo una discesa più rapida.
+          </button>
+          <button class="quiz-option-btn" onclick="checkQuiz(1, 'C', this)">
+            C) Perché i diruttori aumentano direttamente la portanza dell'ala producendo una forza verso l'alto che destabilizza l'aliante.
+          </button>
+        </div>
+        <div id="quiz-fb-1" class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz Question 2 -->
+      <div class="quiz-card">
+        <div class="quiz-question">
+          2. Qual è l'effetto dell'estrazione dei freni aerodinamici sulla velocità limite (<span class="math-var">V<span class="math-sub">lim</span></span>) in picchiata e da quale termine dipende analiticamente?
+        </div>
+        <div class="quiz-options">
+          <button class="quiz-option-btn" onclick="checkQuiz(2, 'A', this)">
+            A) La velocità limite aumenta in proporzione al carico alare e non dipende dalla resistenza parassita.
+          </button>
+          <button class="quiz-option-btn" onclick="checkQuiz(2, 'B', this)">
+            B) La velocità limite si riduce nettamente poiché varia inversamente alla radice quadrata del coefficiente parassita frenato (<span class="math-var">1 / √C'<span class="math-sub">D0</span></span>).
+          </button>
+          <button class="quiz-option-btn" onclick="checkQuiz(2, 'C', this)">
+            C) La velocità limite rimane invariata ma la traiettoria diventa orizzontale.
+          </button>
+        </div>
+        <div id="quiz-fb-2" class="quiz-feedback"></div>
+      </div>
+
+      <!-- Quiz Question 3 -->
+      <div class="quiz-card">
+        <div class="quiz-question">
+          3. In una discesa ripida o picchiata ad alta inclinazione (<span class="math-var">γ</span>), qual è la quota di resistenza totale (<span class="math-var">R<span class="math-sub">tot</span></span>) assorbita dai diruttori rispetto a quella del velivolo?
+        </div>
+        <div class="quiz-options">
+          <button class="quiz-option-btn" onclick="checkQuiz(3, 'A', this)">
+            A) Meno del 10%, poiché la maggior parte della resistenza è generata dalla fusoliera.
+          </button>
+          <button class="quiz-option-btn" onclick="checkQuiz(3, 'B', this)">
+            B) Esattamente il 50%, suddivisa equamente tra ali e freni.
+          </button>
+          <button class="quiz-option-btn" onclick="checkQuiz(3, 'C', this)">
+            C) Oltre l'80-90% della resistenza totale necessaria a bilanciare la componente del peso lungo la traiettoria.
+          </button>
+        </div>
+        <div id="quiz-fb-3" class="quiz-feedback"></div>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         TAB 5: LIMITS OF MODEL & NUMERICAL VERIFICATION
+         ========================================================================== -->
+    <div id="tab-limiti" class="tab-content" style="display:none;">
+      <h2 style="color: var(--brand-blue); font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem;">
+        Limiti Ingegneristici del Modello e Report di Verifica Numerica
+      </h2>
+
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <h3 style="color: var(--accent-orange); font-size: 1.15rem; margin-bottom: 0.75rem;">1. Aspetti Non Modellati nelle Fonti Ufficiali (Sez. 5 PDF)</h3>
+        <p style="color: var(--text-muted); font-size: 0.9375rem; margin-bottom: 0.75rem;">
+          La trattazione teorica del Prof. Raucci fa riferimento ad un modello analitico unidimensionale stazionario del volo librato. Pertanto, tralascia i seguenti aspetti tecnici essenziali nella progettazione aeronautica reale:
+        </p>
+        <ul style="padding-left: 1.25rem; color: var(--text-muted); font-size: 0.9375rem; display:flex; flex-direction:column; gap:0.5rem;">
+          <li><strong>Tipologia Costruttiva e Azionamento:</strong> Non vengono distinte le configurazioni meccaniche a lama singola, a pettine sfasato o a fessura doppia (tipo Schempp-Hirth), né le trasmissioni di comando (aste rigide, cavi o attuatori idraulici).</li>
+          <li><strong>Posizionamento Geometrico sull'Ala:</strong> Le equazioni non tengono conto della posizione dei freni lungo l'apertura alare o lungo la corda (estradosso vs intradosso).</li>
+          <li><strong>Interferenza Aerodinamica sulla Portanza (<span class="math-var">C<span class="math-sub">L</span></span>):</strong> Il modello assume l'ipotesi semplificativa che i diruttori alterino esclusivamente <span class="math-var">C<span class="math-sub">D0</span></span>, ignorando la separazione locale dello strato limite e la riduzione di portanza locale.</li>
+          <li><strong>Impatto sul Fattore di Oswald (<span class="math-var">e</span>):</strong> Non viene modellata la distorsione nella distribuzione di portanza lungo l'apertura e la conseguente variazione dell'efficienza della pianta alare.</li>
+        </ul>
+      </div>
+
+      <div class="verification-box">
+        <h3>Report di Verifica Numerica e Collaudo Interazioni</h3>
+        <p style="margin-bottom: 0.5rem;">
+          <strong>Calcolo di Controllo (Dataset Esercizio 8):</strong><br>
+          Con <span class="math-var">W</span> = 2646 N, <span class="math-var">S</span> = 12,25 m², <span class="math-var">W/S</span> = 216 N/m², <span class="math-var">C<span class="math-sub">D0</span></span> = 0,0151, <span class="math-var">e·AR</span> = 17, <span class="math-var">S<span class="math-sub">f</span></span> = 0,55 m², <span class="math-var">C<span class="math-sub">Df</span></span> = 1,7, <span class="math-var">σ</span> = 1,0:
+        </p>
+        <ul style="padding-left: 1.25rem; margin-bottom: 0.75rem;">
+          <li><span class="math-var">C'<span class="math-sub">D0</span></span> = 0,0151 + 1,7 · (0,55 / 12,25) = <strong>0,0913</strong> (Confermato)</li>
+          <li><span class="math-var">V<span class="math-sub">lim</span></span> = 1,277 · √(216 / 0,0913) = <strong>62,1 m/s (223,6 km/h)</strong> (Confermato vs 152,7 m/s senza freni)</li>
+          <li><span class="math-var">E'<span class="math-sub">max</span></span> = 0,886 · √(17 / 0,0913) = <strong>12,1</strong> (Confermato vs 29,7)</li>
+          <li><span class="math-var">γ'<span class="math-sub">min</span></span> = arctan(1 / 12,1) = <strong>4° 44'</strong> (Confermato vs 1° 56')</li>
+        </ul>
+        <p>
+          <strong>Segnalazione Elementi Non Verificabili:</strong> Non è stato possibile verificare empiricamente l'insorgenza di vibrazioni idroelastiche (buffeting) sul piano di coda orizzontale investito dalla scia turbolenta dei diruttori, in quanto tali fenomeni instazionari richiedono simulazioni CFD tridimensionali o prove in galleria del vento.
+        </p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ==========================================================================
+       MODAL DIALOGS (ACCESSIBLE DEEP DIVES WITH FOCUS TRAP & ESC KEY)
+       ========================================================================== -->
+  
+  <!-- Modal 1 -->
+  <div id="modal-sez1" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="m1-title">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 id="m1-title" class="modal-title">1. Definizione e Funzione Operativa</h3>
+        <button class="modal-close-btn" onclick="closeModal('modal-sez1')" aria-label="Chiudi finestra">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>
+          I <strong>diruttori</strong> (o freni aerodinamici) sono dispositivi piane estraibili installati sulle ali degli alianti con la funzione prioritaria di incrementare la sola <em>resistenza parassita</em> (<span class="math-var">C<span class="math-sub">D0</span></span>), senza apportare sensibili variazioni alla portanza complessiva nelle ipotesi del modello 1D.
+        </p>
+        <div class="formula-block">
+          Coefficiente proprio dei diruttori: <span class="math-var">C<span class="math-sub">Df</span></span> = 1,6 ÷ 1,7
+        </div>
+        <p>
+          Tale valore è paragonabile a quello di una lastra piana investita normalmente dal flusso d'aria (ortogonale al vento relativo).
+        </p>
+        <h4 style="color:var(--brand-blue); margin-top:1rem; margin-bottom:0.5rem;">Duplice Scopo Operativo:</h4>
+        <ol style="padding-left:1.25rem;">
+          <li><strong>Irripidire la traiettoria di avvicinamento:</strong> Riducendo l'efficienza massima, l'angolo di discesa aumenta consentendo di superare ostacoli al limite del campo di volo e toccare terra nel punto desiderato.</li>
+          <li><strong>Limitare la velocità in picchiata:</strong> Mantiene la velocità entro i limiti di sicurezza strutturale (<span class="math-var">V<span class="math-sub">NE</span></span> - Never Exceed Speed) anche durante discese ripidissime o picchiate verticali ("candela").</li>
+        </ol>
+        <div class="citation-tag">Riferimento fonte: Prof. Ing. B. Raucci — Il Volo Librato, Pag. 1, Sezione 9.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2 -->
+  <div id="modal-sez2" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="m2-title">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 id="m2-title" class="modal-title">2. Incremento della Resistenza Parassita Complessiva</h3>
+        <button class="modal-close-btn" onclick="closeModal('modal-sez2')" aria-label="Chiudi finestra">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>
+          L'equazione fondamentale che esprime il nuovo coefficiente di resistenza parassita totale dell'aliante a freni completamente estesi (<span class="math-var">C'<span class="math-sub">D0</span></span>) è:
+        </p>
+        <div class="formula-block">
+          <span class="math-var">C'<span class="math-sub">D0</span> = C<span class="math-sub">D0</span> + C<span class="math-sub">Df</span> · (S<span class="math-sub">f</span> / S)</span>
+        </div>
+        <h4 style="color:var(--brand-blue); margin-top:1rem;">Analisi dei Termini:</h4>
+        <ul style="padding-left:1.25rem; font-size:0.9375rem;">
+          <li><span class="math-var">C<span class="math-sub">D0</span></span>: Coeff. parassita del velivolo pulito (es. 0,0151).</li>
+          <li><span class="math-var">C<span class="math-sub">Df</span></span>: Coeff. proprio dei freni (1,7).</li>
+          <li><span class="math-var">S<span class="math-sub">f</span></span>: Superficie totale proiettata dei freni (es. 0,55 m²).</li>
+          <li><span class="math-var">S</span>: Superficie alare di riferimento (es. 12,25 m²).</li>
+        </ul>
+        <div class="example-box">
+          <h4>Esempio Svolto (Dati Esercizio 8):</h4>
+          <p><span class="math-var">C'<span class="math-sub">D0</span></span> = 0,0151 + 1,7 · (0,55 / 12,25) = 0,0151 + 0,0763 = <strong>0,0914</strong></p>
+          <p><em>Esito fisico:</em> Il coefficiente di resistenza parassita risulta incrementato di oltre <strong>6 volte</strong> (+505%) agendo su appena il 4,5% della superficie alare.
+        </div>
+        <div class="citation-tag">Riferimento fonte: Prof. Ing. B. Raucci — Il Volo Librato, Pag. 1, Sezione 9.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3 -->
+  <div id="modal-sez3" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="m3-title">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 id="m3-title" class="modal-title">3. Velocità Limite in Picchiata Verticale (γ = 90°)</h3>
+        <button class="modal-close-btn" onclick="closeModal('modal-sez3')" aria-label="Chiudi finestra">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>
+          In picchiata verticale con assetto a portanza nulla (<span class="math-var">C<span class="math-sub">L</span></span> = 0), la sola resistenza parassita bilancia l'intero peso dell'aliante (<span class="math-var">W = D</span>).
+        </p>
+        <div class="formula-block">
+          <span class="math-var">V<span class="math-sub">lim</span> = (1,277 / √σ) · √ [ (W / S) / C'<span class="math-sub">D0</span> ]</span>
+        </div>
+        <p style="font-size:0.875rem; color:var(--text-muted);">
+          Dove la costante <strong>1,277</strong> deriva dalla densità dell'aria standard al livello del mare (<span class="math-var">ρ<span class="math-sub">0</span></span> = 1,2257 kg/m³): √(2 / 1,2257) ≈ 1,2773.
+        </p>
+        <div class="example-box">
+          <h4>Dimostrazione Comparativa (Livello del mare, σ = 1):</h4>
+          <p><strong>Velivolo Pulito:</strong> <span class="math-var">V<span class="math-sub">lim</span></span> = 1,277 · √(216 / 0,0151) = <strong>152,7 m/s (550 km/h)</strong></p>
+          <p><strong>Freni Estesi:</strong> <span class="math-var">V<span class="math-sub">lim</span></span> = 1,277 · √(216 / 0,0913) = <strong>62,1 m/s (223,6 km/h)</strong></p>
+          <p><em>Conclusione:</em> L'estrazione dei diruttori dimezza abbondantemente la velocità massima raggiungibile, evitando il cedimento strutturale dell'ala.
+        </div>
+        <div class="citation-tag">Riferimento fonte: Prof. Ing. B. Raucci — Il Volo Librato, Pag. 1, Sezione 12.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4 -->
+  <div id="modal-sez4" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="m4-title">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 id="m4-title" class="modal-title">4. Efficienza Massima e Angolo Minimo di Rampa</h3>
+        <button class="modal-close-btn" onclick="closeModal('modal-sez4')" aria-label="Chiudi finestra">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Dalla polarizzazione parabolica dell'ala, l'efficienza aerodinamica massima a freni estratti (<span class="math-var">E'<span class="math-sub">max</span></span>) e il corrispondente angolo minimo di discesa (<span class="math-var">γ'<span class="math-sub">min</span></span>) si calcolano mediante:
+        </p>
+        <div class="formula-block">
+          <span class="math-var">E'<span class="math-sub">max</span> = 0,886 · √ [ (e · AR) / C'<span class="math-sub">D0</span> ]</span><br>
+          <span class="math-var">γ'<span class="math-sub">min</span> = arctan(1 / E'<span class="math-sub">max</span>)</span>
+        </div>
+        <p style="font-size:0.875rem; color:var(--text-muted);">
+          La costante <strong>0,886</strong> equivale a √(π) / 2. <span class="math-var">e · AR</span> rappresenta l'allungamento alare effettivo.
+        </p>
+        <div class="example-box">
+          <h4>Applicazione Numerica:</h4>
+          <p>Con <span class="math-var">e·AR</span> = 17 e <span class="math-var">C'<span class="math-sub">D0</span></span> = 0,0913:</p>
+          <p><span class="math-var">E'<span class="math-sub">max</span></span> = 0,886 · √(17 / 0,0913) = <strong>12,1</strong> (contro 29,7 dell'aliante pulito)</p>
+          <p><span class="math-var">γ'<span class="math-sub">min</span></span> = arctan(1 / 12,1) = 0,0826 rad = <strong>4° 44'</strong> (contro 1° 56' dell'aliante pulito)</p>
+        </div>
+        <div class="citation-tag">Riferimento fonte: Prof. Ing. B. Raucci — Il Volo Librato, Pag. 2, Sezione 9.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 5 -->
+  <div id="modal-sez5" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="m5-title">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 id="m5-title" class="modal-title">5. Frenatura in Volo Librato Ripido e Area Sf</h3>
+        <button class="modal-close-btn" onclick="closeModal('modal-sez5')" aria-label="Chiudi finestra">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Durante una discesa inclinata ad angolo <span class="math-var">γ</span>, l'equilibrio delle forze lungo la traiettoria richiede che la resistenza totale <span class="math-var">R<span class="math-sub">tot</span></span> uguagli la componente della forza peso:
+        </p>
+        <div class="formula-block">
+          <span class="math-var">R<span class="math-sub">tot</span> = W · sin(γ)</span><br>
+          <span class="math-var">D<span class="math-sub">vel</span> = C<span class="math-sub">D</span> · q · S</span><br>
+          <span class="math-var">R<span class="math-sub">add</span> = R<span class="math-sub">tot</span> - D<span class="math-sub">vel</span></span>
+        </div>
+        <p>
+          La superficie dei freni necessaria (<span class="math-var">S<span class="math-sub">f</span></span>) per erogare la resistenza addizionale <span class="math-var">R<span class="math-sub">add</span></span> alla pressione dinamica <span class="math-var">q = ½ ρ V²</span> è data da:
+        </p>
+        <div class="formula-block">
+          <span class="math-var">S<span class="math-sub">f</span> = R<span class="math-sub">add</span> / (C<span class="math-sub">Df</span> · q)</span>
+        </div>
+        <div class="citation-tag">Riferimento fonte: Prof. Ing. B. Raucci — Il Volo Librato, Pag. 2, Sezione 12.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 6 -->
+  <div id="modal-sez6" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="m6-title">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 id="m6-title" class="modal-title">6. Aspetti Ingegneristici Non Chiariti dalle Fonti</h3>
+        <button class="modal-close-btn" onclick="closeModal('modal-sez6')" aria-label="Chiudi finestra">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Come evidenziato nel bilancio critico (Pag. 3 del testo), il modello analitico stazionario adottato presenta 4 importanti omissioni ingegneristiche:
+        </p>
+        <ol style="padding-left:1.25rem; line-height:1.8;">
+          <li><strong>Tipologia Costruttiva:</strong> Non distingue tra freni a lama, a doppio pettine Schempp-Hirth o ad intaglio.</li>
+          <li><strong>Posizionamento Geometrico:</strong> Non specifica l'ubicazione lungo l'apertura alare o lungo la corda (estradosso/intradosso).</li>
+          <li><strong>Interferenza sulla Portanza (<span class="math-var">C<span class="math-sub">L</span></span>):</strong> Assume che i freni non modifichino la portanza locale, mentre nella realtà provocano un sensibile lavaggio della vena d'aria e perdita di portanza.</li>
+          <li><strong>Fattore di Oswald (<span class="math-var">e</span>):</strong> Non considera il decadimento dell'efficienza della pianta alare causato dalle turbolenze generate dalle lame estese.</li>
+        </ol>
+        <div class="citation-tag">Riferimento fonte: Prof. Ing. B. Raucci — Il Volo Librato, Pag. 3, Sezione 5.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       JAVASCRIPT LOGIC
+       ========================================================================== -->
+  <script>
+    /* --------------------------------------------------------------------------
+       TAB SWITCHING
+       -------------------------------------------------------------------------- */
+    function switchTab(tabId) {
+      const tabs = ['didattica', 'simulatore', 'glossario', 'quiz', 'limiti'];
+      tabs.forEach(id => {
+        const content = document.getElementById('tab-' + id);
+        if (content) {
+          content.style.display = (id === tabId) ? 'block' : 'none';
+        }
+      });
+
+      const buttons = document.querySelectorAll('.nav-btn');
+      buttons.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('onclick').includes(tabId)) {
+          btn.classList.add('active');
+        }
+      });
+
+      if (tabId === 'simulatore') {
+        updateSimulation();
+      }
+    }
+
+    /* --------------------------------------------------------------------------
+       SIMULATION ENGINE (EXACT MATHEMATICAL FORMULAS FROM SOURCE)
+       -------------------------------------------------------------------------- */
+    function updateSimulation() {
+      // Constants from Ex. 8
+      const W_default = 2646; // N
+      const S = 12.25; // m²
+      const CD0_clean = 0.0151;
+      const CDf = 1.7;
+      const Sf_max = 0.55; // m²
+      const e_AR = 17;
+      const rho0 = 1.2257; // kg/m³
+      const const_1277 = 1.277;
+
+      // Inputs
+      const k_pct = parseFloat(document.getElementById('range-estrazione').value);
+      const gamma_deg = parseFloat(document.getElementById('range-gamma').value);
+      const h_m = parseFloat(document.getElementById('range-quota').value);
+      const ws_val = parseFloat(document.getElementById('range-ws').value);
+
+      // Derived inputs
+      const Sf = Sf_max * (k_pct / 100);
+      const W = ws_val * S;
+      
+      // ISA atmosphere density ratio sigma
+      const sigma = Math.pow(1 - 2.25577e-5 * h_m, 4.25588);
+
+      // 1. CD0'
+      const CD0_prime = CD0_clean + CDf * (Sf / S);
+
+      // 2. Vlim (m/s and km/h)
+      const vlim_ms = (const_1277 / Math.sqrt(sigma)) * Math.sqrt(ws_val / CD0_prime);
+      const vlim_kmh = vlim_ms * 3.6;
+
+      // 3. Emax'
+      const emax_prime = 0.886 * Math.sqrt(e_AR / CD0_prime);
+
+      // 4. gamma'min
+      const gmin_rad = Math.atan(1 / emax_prime);
+      const gmin_deg_val = gmin_rad * (180 / Math.PI);
+      const gmin_d = Math.floor(gmin_deg_val);
+      const gmin_m = Math.round((gmin_deg_val - gmin_d) * 60);
+
+      // 5. Dynamic pressure and Braking Forces
+      const rho = rho0 * sigma;
+      const q = 0.5 * rho * Math.pow(vlim_ms, 2);
+      const gamma_rad = gamma_deg * (Math.PI / 180);
+      const R_tot = W * Math.sin(gamma_rad);
+      const D_vel = CD0_clean * q * S;
+      let R_add = R_tot - D_vel;
+      if (R_add < 0) R_add = 0;
+      const R_add_pct = (R_tot > 0) ? (R_add / R_tot) * 100 : 0;
+
+      // Update Labels
+      document.getElementById('val-estrazione').innerText = k_pct + ' %';
+      document.getElementById('lbl-sf').innerText = Sf.toFixed(2);
+      document.getElementById('val-gamma').innerText = gamma_deg + ' °';
+      document.getElementById('val-quota').innerText = h_m + ' m';
+      document.getElementById('lbl-sigma').innerText = sigma.toFixed(3);
+      document.getElementById('val-ws').innerText = ws_val + ' N/m²';
+      document.getElementById('lbl-peso').innerText = Math.round(W);
+
+      // Update Outputs
+      document.getElementById('out-cd0').innerText = CD0_prime.toFixed(4);
+      document.getElementById('out-vlim').innerText = vlim_kmh.toFixed(1);
+      document.getElementById('out-vlim-ms').innerText = vlim_ms.toFixed(1);
+      document.getElementById('out-emax').innerText = emax_prime.toFixed(1);
+      document.getElementById('out-gmin').innerText = gmin_d + '° ' + gmin_m + "'";
+      document.getElementById('out-radd').innerText = Math.round(R_add);
+      document.getElementById('out-radd-pct').innerText = R_add_pct.toFixed(1);
+
+      // Render Dynamic SVG Visualizer
+      renderSVGVisualizer(k_pct, gamma_deg, vlim_kmh, R_tot, R_add);
+    }
+
+    /* --------------------------------------------------------------------------
+       DYNAMIC SVG VISUALIZER RENDERER
+       -------------------------------------------------------------------------- */
+    function renderSVGVisualizer(k_pct, gamma_deg, vlim_kmh, R_tot, R_add) {
+      const svg = document.getElementById('sim-svg');
+      const brakeHeight = (k_pct / 100) * 28; // Airbrake deployment height in pixels
+
+      // Force vector scale
+      const vectorLength = Math.min(100, Math.max(15, (R_add / 3000) * 80));
+
+      svg.innerHTML = `
+        <!-- Background Grid -->
+        <defs>
+          <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#E2D9CC" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+        <rect width="600" height="280" fill="url(#grid)" />
+
+        <!-- Horizon Line -->
+        <line x1="20" y1="240" x2="580" y2="240" stroke="#94A3B8" stroke-width="2" stroke-dasharray="4 4"/>
+        <text x="520" y="232" font-size="10" fill="#64748B">Orizzonte</text>
+
+        <!-- Glider Trajectory Line -->
+        <g transform="translate(100, 80)">
+          <line x1="0" y1="0" x2="${250 * Math.cos(gamma_deg * Math.PI / 180)}" y2="${250 * Math.sin(gamma_deg * Math.PI / 180)}" 
+                stroke="#C2410C" stroke-width="3" stroke-dasharray="6 3"/>
+          <text x="15" y="-10" font-size="12" font-weight="bold" fill="#C2410C">Traiettoria γ = ${gamma_deg}°</text>
+        </g>
+
+        <!-- Wing Airfoil Schema -->
+        <g transform="translate(100, 80) rotate(${gamma_deg - 5})">
+          <!-- Airfoil Shape -->
+          <path d="M -60 0 C -40 -18 30 -12 80 0 C 30 6 -40 8 -60 0 Z" fill="#1E3A8A" stroke="#0F172A" stroke-width="2"/>
+          
+          <!-- Upper Airbrake Blade -->
+          <rect x="0" y="${-brakeHeight}" width="8" height="${brakeHeight}" fill="#C2410C" stroke="#7C2D12" stroke-width="1.5" />
+          
+          <!-- Lower Airbrake Blade (Symmetric) -->
+          <rect x="0" y="2" width="8" height="${brakeHeight}" fill="#C2410C" stroke="#7C2D12" stroke-width="1.5" />
+
+          <!-- Turbulent Vortex Effect if deployed -->
+          ${k_pct > 10 ? `
+            <path d="M 10 ${-brakeHeight} Q 25 ${-brakeHeight-10} 35 ${-brakeHeight+5} T 50 ${-brakeHeight}" 
+                  fill="none" stroke="#EA580C" stroke-width="2" opacity="0.8"/>
+            <path d="M 10 ${brakeHeight} Q 25 ${brakeHeight+10} 35 ${brakeHeight-5} T 50 ${brakeHeight}" 
+                  fill="none" stroke="#EA580C" stroke-width="2" opacity="0.8"/>
+          ` : ''}
+
+          <!-- Drag Vector R_add -->
+          ${k_pct > 0 ? `
+            <line x1="4" y1="${-brakeHeight/2}" x2="-${vectorLength}" y2="${-brakeHeight/2}" stroke="#DC2626" stroke-width="3" marker-end="url(#arrow)"/>
+            <text x="-${vectorLength + 45}" y="${-brakeHeight/2 + 4}" font-size="11" font-weight="bold" fill="#DC2626">R_add (${Math.round(R_add)}N)</text>
+          ` : ''}
+        </g>
+
+        <!-- Speed Gauge Visualizer -->
+        <g transform="translate(420, 30)">
+          <rect x="0" y="0" width="160" height="80" rx="8" fill="#FFFFFF" stroke="#E2D9CC" stroke-width="1"/>
+          <text x="15" y="22" font-size="11" font-weight="bold" fill="#475569">VELOCITÀ IN PICCHIATA</text>
+          <text x="15" y="52" font-size="22" font-weight="800" fill="#1E3A8A">${vlim_kmh.toFixed(0)} <tspan font-size="12">km/h</tspan></text>
+          <rect x="15" y="60" width="130" height="8" rx="4" fill="#E2E8F0"/>
+          <rect x="15" y="60" width="${Math.min(130, (vlim_kmh / 550) * 130)}" height="8" rx="4" fill="${vlim_kmh > 300 ? '#DC2626' : '#10B981'}"/>
+        </g>
+      `;
+    }
+
+    /* --------------------------------------------------------------------------
+       QUIZ EVALUATION ENGINE
+       -------------------------------------------------------------------------- */
+    function checkQuiz(qNum, choice, btn) {
+      const card = btn.closest('.quiz-card');
+      const buttons = card.querySelectorAll('.quiz-option-btn');
+      buttons.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+
+      const fb = document.getElementById('quiz-fb-' + qNum);
+      
+      const correctAnswers = {
+        1: {
+          ans: 'A',
+          explanation: 'Corretto! La resistenza parassita dell\'aliante pulito C_D0 è piccolissima (0.0151). Un\'area di freni Sf di soli 0.55 m² con C_Df = 1.7 aggiunge un contributo di 0.0763, moltiplicando la resistenza totale per 6 volte.'
+        },
+        2: {
+          ans: 'B',
+          explanation: 'Corretto! La formula Vlim = (1.277/√σ) · √[(W/S)/C\'_D0] dimostra che la velocità limite varia inversamente alla radice di C\'_D0. Aumentando C\'_D0 di 6 volte, Vlim si riduce di un fattore √6 ≈ 2.45.'
+        },
+        3: {
+          ans: 'C',
+          explanation: 'Corretto! In discesa ripida o picchiata, la componente del peso W·sin(γ) è enorme rispetto alla resistenza naturale dell\'aliante pulito. I freni arrivano ad assorbire fino all\'85-90% della resistenza totale.'
+        }
+      };
+
+      const qData = correctAnswers[qNum];
+      if (choice === qData.ans) {
+        fb.className = 'quiz-feedback correct';
+        fb.innerHTML = '<strong>Risposta Esatta!</strong> ' + qData.explanation;
+      } else {
+        fb.className = 'quiz-feedback incorrect';
+        fb.innerHTML = '<strong>Risposta Non Corretta.</strong> Riprova! Ricorda la relazione analitica tra C_D0 pulito e l\'incremento apportato da C_Df · (Sf/S).';
+      }
+    }
+
+    /* --------------------------------------------------------------------------
+       MODAL DIALOG MANAGEMENT (FOCUS TRAP & ESC KEY)
+       -------------------------------------------------------------------------- */
+    let lastActiveElement = null;
+
+    function openModal(modalId) {
+      lastActiveElement = document.activeElement;
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.add('open');
+        const closeBtn = modal.querySelector('.modal-close-btn');
+        if (closeBtn) closeBtn.focus();
+      }
+    }
+
+    function closeModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.remove('open');
+      }
+      if (lastActiveElement) {
+        lastActiveElement.focus();
+      }
+    }
+
+    // Keyboard listener for ESC key and focus trapping
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const openModals = document.querySelectorAll('.modal-backdrop.open');
+        openModals.forEach(m => closeModal(m.id));
+      }
+    });
+
+    // Close modal when clicking backdrop
+    document.querySelectorAll('.modal-backdrop').forEach(backdrop => {
+      backdrop.addEventListener('click', function(e) {
+        if (e.target === this) {
+          closeModal(this.id);
+        }
+      });
+    });
+
+    // Initialize on window load
+    window.onload = function() {
+      updateSimulation();
+    };
+  </script>
+</body>
+</html>
